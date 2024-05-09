@@ -22,3 +22,7 @@ Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/{post}', [PostController::class ,'show']);
 // createメソッドで作成した情報を受け付ける＝DBへ保存するstoreメソッドを実行する
 Route::post('/posts', [PostController::class, 'store']);
+
+Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
+
+Route::put('/posts/{post}', [PostController::class, 'update']);
