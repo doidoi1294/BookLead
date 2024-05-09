@@ -11,6 +11,9 @@
         <h1 class="title">
             {{ $post->title }}
         </h1>
+        <!--<h2 class="category">-->
+        <!--    {{ $post->category }}-->
+        <!--</h2>-->
         <div class="content">
             <div class="content__post">
                 <h3>本文</h3>
