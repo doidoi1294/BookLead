@@ -20,5 +20,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        
+        // シーダファイルの呼び出し
+        $this->call([
+                UserSeeder::class,
+                CategorySeeder::class,
+                PostSeeder::class,
+                Book_categorySeeder::class,
+                BookSeeder::class,
+                DiarySeeder::class,
+        ]);
     }
 }

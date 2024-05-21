@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('diaries', function (Blueprint $table) {
+            $table->foreignId('book_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::table('diaries', function (Blueprint $table) {
+            //
+        });
     }
 };

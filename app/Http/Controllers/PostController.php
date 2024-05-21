@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 //この場合、App\Models内のPostクラスをインポートしている。
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+// リレーションを記述したモデル
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -32,9 +34,13 @@ class PostController extends Controller
         //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
     }
     
-    public function create()
+    // public function create()
+    // {
+    //     return view('posts.create');
+    // }
+    public function create(Category $category)
     {
-        return view('posts.create');
+        return view('posts.create')->with(['categories' => $category->get()]);
     }
     
     public function store(Post $post, PostRequest $request) // 引数をRequestからPostRequestにする
