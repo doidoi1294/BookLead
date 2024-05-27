@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\Book_categoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +31,22 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
 });
 
+// Route::controller(BookController::class)->middleware(['auth'])->group(function(){
+//     Route::get('/library', 'index')->name('index');
+//     Route::post('/library', 'store')->name('store');
+//     Route::get('/library/create', 'create')->name('create');
+//     Route::get('/library/{post}', 'show')->name('show');
+// });
+
+// /{uesr}/library で指定
+Route::get('/library', [BookController::class ,'index']);
+Route::post('/library', [BookController::class, 'store']);
+Route::get('/library/create', [BookController::class, 'create']);
+Route::get('/library/{book}', [BookController::class ,'show']);
+
 Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware("auth");
+
+Route::get('/book_categories/{book_category}', [Book_categoryController::class,'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

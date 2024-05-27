@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 //この場合、App\Models内のPostクラスをインポートしている。
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Auth;
 // リレーションを記述したモデル
 use App\Models\Category;
 
@@ -44,9 +45,12 @@ class PostController extends Controller
     }
     
     public function store(Post $post, PostRequest $request) // 引数をRequestからPostRequestにする
-    {
-        $input=$request['post'];
-        $post->fill($input)->save();
+    {   
+        // PostRequestでバリデーションが通った後、リクエストからのデータは$post変数にセットされている
+        $user_id = Auth::id();
+        $post = new Post(); // 新しいPostモデルのインスタンスを作成
+        $post->user_id = $user_id; // ユーザーIDを設定
+        $post->fill($request->post)->save(); // リクエストからのデータをモデルにセットして保存
         return redirect('/posts/'.$post->id);
     }
     
