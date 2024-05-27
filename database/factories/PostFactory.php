@@ -23,7 +23,6 @@ class PostFactory extends Factory
             'user_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
-            'deleted_at' => new DateTime(),
         ];
     }
 }

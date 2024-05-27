@@ -2,33 +2,33 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <title>library</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
         <p>ログインユーザー：{{ Auth::user()->name }}</p>
-        <a href='/library'>マイライブラリ</a>
-        <a href='/posts/create'>投稿の作成</a>
-        <h1>Blog Name</h1>
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
+        <a href='/'>掲示板</a>
+        <a href='/library/create'>本を登録する</a>
+        <h1>マイライブラリ</h1>
+        <div class='library'>
+            @foreach ($books as $book)
+                <div class='books'>
                     <h2 class='title'>
-                        <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+                        <a href="/library/{{ $book->id }}">{{ $book->title }}</a>
                     </h2>
-                    <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
-                    <p class='body'>{{ $post->body }}</p>
-                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                    <a href="/book_categories/{{ $book->book_category->id }}">{{ $book->book_category->name }}</a>
+                    <p class='author'>{{ $book->author }}</p>
+                    <form action="/library/{{ $book->id }}" id="form_{{ $book->id }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="button" onclick="deletePost({{ $post->id }})">delete</button> 
+                        <button type="button" onclick="deletePost({{ $book->id }})">delete</button> 
                     </form>
                 </div>
             @endforeach
         </div>
         <div class='paginate'>
-            {{ $posts->links() }}
+            {{$books->links() }}
         </div>
     </body>
 </html>

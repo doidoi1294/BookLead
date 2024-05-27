@@ -26,7 +26,8 @@ class Post extends Model
     protected $fillable = [
     'title',
     'body',
-    'category_id'
+    'category_id',
+    'user_id'
     ];
     //Categoryに対するリレーション
     // 1対多なので相手側を「category」と単数形にする

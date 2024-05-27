@@ -12,9 +12,13 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
+        // 初めからすべてのカラムを定義しておく
         Schema::create('follows', function (Blueprint $table) {
             $table->id();
+            // 参照先のテーブル(users)を指定する
+            $table->foreignId('follower_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('followee_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
