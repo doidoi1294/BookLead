@@ -5,19 +5,32 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home', ['user' => Auth::id()]) }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <!--Homeという名前でナビゲーションを追加-->
+                    <x-nav-link :href="route('home', ['user' => Auth::id()])" :active="request()->routeIs('home')">
+                        {{ __('Home') }}
                     </x-nav-link>
-                    <!--Indexという名前でナビゲーションを追加-->
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        {{ __('Index') }}
+                    
+                    <x-nav-link :href="route('bookIndex', ['user' => Auth::id()])" :active="request()->routeIs('bookIndex')">
+                        {{ __('マイライブラリ') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('postIndex')" :active="request()->routeIs('postIndex')">
+                        {{ __('掲示板') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('diaryIndex', ['user' => Auth::id()])" :active="request()->routeIs('diaryIndex')">
+                        {{ __('日記の一覧') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('mypage', ['user' => Auth::id()])" :active="request()->routeIs('mypage')">
+                        {{ __('マイページ') }}
                     </x-nav-link>
                 </div>
             </div>

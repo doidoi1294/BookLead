@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">プロフィールの編集</x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Profile') }}
@@ -23,6 +24,10 @@
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')
                 </div>
+            </div>
+            <div class="back mt-4">
+                [<a href="/{{ Auth::id() }}/posts/mypage"class="text-blue-500 hover:underline">戻る</a>]
+            </div>
             </div>
         </div>
     </div>

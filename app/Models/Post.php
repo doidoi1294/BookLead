@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -29,6 +30,27 @@ class Post extends Model
     'category_id',
     'user_id'
     ];
+    // いいねされるいるかどうかの判定
+    public function is_post_liked_by_auth_user()
+    {
+        $user_id = Auth::id();
+        
+        $post_likers = array();
+        foreach($this->post_likes as $post_like){
+            array_push($post_likers, $post_like->user_id);
+        }
+        
+        if(in_array($user_id, $post_likers)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'post_likes')->withTimestamps();
+    }
     //Categoryに対するリレーション
     // 1対多なので相手側を「category」と単数形にする
     public function category(){
@@ -45,6 +67,10 @@ class Post extends Model
     //Commentに対するリレーション
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+    //Follow
+    public function follows(){
+        return $this->hasMany(Follow::class);
     }
     
 }

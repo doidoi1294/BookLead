@@ -19,11 +19,10 @@ class DiaryFactory extends Factory
         return [
             'date' => fake()->date($format = 'Y-m-d', $max = 'now'),
             'page' => fake()->randomDigitNotNull,
-            'body' => fake()->text($maxNbChars = 6),
-            'book_id' => 2,
+            'body' => fake()->word,
+            'book_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
-            'deleted_at' => new DateTime(),
         ];
     }
 }

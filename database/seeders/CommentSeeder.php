@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use DateTime;
 // モデルの指定
-use App\Models\Diary;
+use App\Models\Comment;
 
-class DiarySeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,6 +18,6 @@ class DiarySeeder extends Seeder
      */
     public function run()
     {
-        Diary::factory()->count(10)->create();
+        Comment::factory()->count(5)->create();
     }
 }

@@ -37,5 +37,8 @@ class UserSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
+        foreach ($users as $user) {
+            DB::table('users')->insert($user);
+        }
     }
 }

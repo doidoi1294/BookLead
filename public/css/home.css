@@ -1,0 +1,41 @@
+/* CSS for the horizontal menu banner with site name and menu items left-aligned */
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #f8f9fa; /* Light background color for the banner */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+header .site-name {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+header .menu {
+    display: flex;
+}
+
+header .menu a {
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+header .menu a:hover {
+    background-color: #e9ecef; /* Light grey background on hover */
+}
+
+header .menu a:active {
+    background-color: #dee2e6; /* Slightly darker grey on active state */
+}
