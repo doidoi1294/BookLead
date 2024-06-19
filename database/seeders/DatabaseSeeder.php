@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
                 Book_categorySeeder::class,
                 BookSeeder::class,
                 DiarySeeder::class,
+                FollowSeeder::class,
+                CommentSeeder::class,
+                Post_likeSeeder::class,
         ]);
     }
 }

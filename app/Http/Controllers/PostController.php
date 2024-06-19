@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //use宣言は外部にあるクラスをPostController内にインポートできる。
 //この場合、App\Models内のPostクラスをインポートしている。
 use App\Models\Post;
+use App\Models\User;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
 // リレーションを記述したモデル
@@ -70,6 +71,19 @@ class PostController extends Controller
     public function delete(Post $post)
     {
         $post->delete();
-        return redirect('/');
+        return redirect('/posts/index');
     }
+    
+    public function mypage(Post $post, User $user)
+    {   
+        // まず、投稿データをすべて取得
+        $posts = $post->getPaginateByLimit();
+        
+        foreach ($posts as $post) {
+            $post->user = $user->find($post->user_id);
+        }
+        
+        return view('posts.mypage')->with(['posts' => $posts]);
+    }
+
 }

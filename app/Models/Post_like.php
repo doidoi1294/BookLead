@@ -9,6 +9,9 @@ class Post_like extends Model
 {
     use HasFactory;
     
+    // 配列内の要素を書き込み可能にする
+    protected $fillable = ['post_id','user_id'];
+    
     //Userに対するリレーション
     public function user(){
         return $this->belongsTo(User::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Models\User;
 // リレーションを記述したモデル
 use App\Models\Book_category;
 // 画像アップロード用
@@ -43,10 +44,32 @@ class BookController extends Controller
     $book->save(); // データベースに保存
     
     // 保存後にリダイレクト
-    return redirect('/library/' . $book->id);
+    return redirect('/'.$book->user_id.'/library/');
+    }
+    // Userの情報も渡す
+    public function show(User $user, Book $book){
+        return view('library.show')->with(['book' => $book]);
     }
     
-    public function show(Book $book){
-        return view('library.show')->with(['book' => $book]);
+    public function edit(User $user, Book $book)
+    {
+        return view('library.edit')->with(['book' => $book]);
+    }
+    
+    public function update(Book $book, BookRequest $request)
+    {
+        $input_book = $request['book'];
+        $book->fill($input_book)->save();
+        
+        $book->user_id = Auth::id();
+        return redirect('/'.$book->user_id.'/library/');
+    }
+    
+    public function delete(User $user, Book $book)
+    {
+        $book->delete();
+        
+        $book->user_id = Auth::id();
+        return redirect('/'.$book->user_id.'/library/');
     }
 }
