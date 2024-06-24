@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -63,33 +64,29 @@ class User extends Authenticatable
         return $this->hasMany(Book::class);
     }
     // Followテーブルに対するリレーション
-    public function follows(){
-        return $this->hasMany(Follow::class);
+    // public function follows(){
+    //     return $this->hasMany(Follow::class);
+    // }
+    public function follows()
+    {
+        return $this->hasMany(Follow::class, 'follower_id');
     }
-    // フォローしているユーザーのリレーションシップ
+    // フォローしているユーザーのリレーション
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id');
     }
 
-    // フォローされているユーザーのリレーションシップ
+    // フォローされているユーザーのリレーション
     public function followees()
     {
         return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id');
     }
     
-    // いいねされるいるかどうかの判定
+    // フォローされるいるかどうかの判定
     public function is_user_followed_by_auth_user($target_user_id)
     {
         $auth_user_id = Auth::id();
-    
-        // followsリレーションを使ってフォローデータを取得し、判定
-        foreach($this->follows as $follow){
-            if($follow->follower_id == $auth_user_id && $follow->followee_id == $target_user_id){
-                return true;
-            }
-        }
-    
-        return false;
+        return $this->follows()->where('followee_id', $target_user_id)->exists();
     }
 }

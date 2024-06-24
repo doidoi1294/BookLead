@@ -8,6 +8,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\Book_categoryController;
 use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\Post_likeController;
+use App\Http\Controllers\FollowController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     // 投稿の一覧の表示のページのURLを変更する
     Route::get('/posts/index', 'index')->name('postIndex');
@@ -39,8 +39,6 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
     Route::get('/{user}/posts/mypage', 'mypage')->name('mypage');
 });
-
-// /{user}/library でuesrごとに指定
 
 Route::controller(BookController::class)->middleware(['auth'])->group(function(){
     // 投稿の一覧の表示のページのURLを変更する
@@ -82,8 +80,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 // いいね機能
-Route::post('/posts/{post}/like', [Post_likeController::class, 'like'])->name('like')->middleware("auth");
-Route::post('/posts/{post}/unlike', [Post_likeController::class, 'unlike'])->name('unlike')->middleware("auth");
+Route::controller(Post_likeController::class)->middleware(['auth'])->group(function(){
+    Route::post('/posts/{post}/like', 'like')->name('like');
+    Route::post('/posts/{post}/unlike', 'unlike')->name('unlike');
+});
 
+// フォロー機能
+Route::controller(FollowController::class)->middleware(['auth'])->group(function(){
+    Route::post('/follow/{user}', 'follow')->name('follow');
+    Route::delete('/unfollow/{user}', 'unfollow')->name('unfollow');
+});
 
 require __DIR__.'/auth.php';

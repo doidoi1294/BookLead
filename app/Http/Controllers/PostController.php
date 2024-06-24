@@ -74,16 +74,25 @@ class PostController extends Controller
         return redirect('/posts/index');
     }
     
-    public function mypage(Post $post, User $user)
+    public function mypage($user_id = null)
     {   
-        // まず、投稿データをすべて取得
-        $posts = $post->getPaginateByLimit();
+        // ログインユーザーの情報を取得
+        $auth_user = Auth::user();
         
-        foreach ($posts as $post) {
-            $post->user = $user->find($post->user_id);
+        // 特定のユーザーの情報を取得
+        if ($user_id) {
+            $user = User::findOrFail($user_id);
+            $is_ownPage = ($auth_user && $auth_user->id == $user_id);
+        } else {
+            $user = $auth_user;
+            $is_ownPage = true;
         }
-        
-        return view('posts.mypage')->with(['posts' => $posts]);
+    
+        // ユーザーの投稿データを取得し、ページネーションで表示
+        $posts = Post::where('user_id', $user->id)->paginate(10);
+    
+        return view('posts.mypage', compact('posts', 'auth_user', 'user', 'is_ownPage'));
     }
+
 
 }
