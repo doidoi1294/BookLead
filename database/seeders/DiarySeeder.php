@@ -18,7 +18,6 @@ class DiarySeeder extends Seeder
      */
     public function run()
     {   
-        \Faker\Factory::create();
         Diary::factory()->count(2)->create();
     }
 }
