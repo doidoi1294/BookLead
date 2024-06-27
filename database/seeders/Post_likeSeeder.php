@@ -25,7 +25,7 @@ class Post_likeSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
             DB::table('post_likes')->insert([
-            'user_id' => 3,
+            'user_id' => 2,
             'post_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
