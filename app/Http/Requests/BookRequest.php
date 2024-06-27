@@ -24,8 +24,21 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'book.title' => 'required|string|max:100',
-            'book.author' => 'required|string|max:100',
+            'book.title' => 'required|string|max:255',
+            'book.author' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'book.title.required' => 'タイトルは必須です。',
+            'book.author.required' => '作者は必須です。',
+            'image.image' => 'ファイルは画像形式である必要があります。',
+            'image.mimes' => '画像形式はjpeg、png、jpg、gifのみです。',
+            'image.max' => '画像の最大サイズは2MBです。',
         ];
     }
 }

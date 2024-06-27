@@ -16,7 +16,7 @@
             body{margin:0}a{background-color:transparent}[hidden]{display:none}
             html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}
             a{color:inherit;text-decoration:inherit}
-            svg,video{display:block;vertical-align:middle}
+            svg,video{display:block;vertical-align:middle;color: orange;}
             video{max-width:100%;height:auto}
             .bg-white{--tw-bg-opacity: 1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}
             .bg-gray-100{--tw-bg-opacity: 1;background-color:rgb(243 244 246 / var(--tw-bg-opacity))}
@@ -47,7 +47,7 @@
             .max-w-6xl{max-width:72rem}
             .min-h-screen{min-height:100vh}
             .overflow-hidden{overflow:hidden}
-            .p-6{padding:1.5rem}
+            .p-6{padding:2.0rem}
             .py-4{padding-top:1rem;padding-bottom:1rem}
             .px-6{padding-left:1.5rem;padding-right:1.5rem}
             .pt-8{padding-top:2rem}.fixed{position:fixed}
@@ -82,10 +82,6 @@
 
             .text-lg {
                 font-size: 1.5rem;
-            }
-
-            .p-6 {
-                padding: 3rem;
             }
 
             .grid-cols-2 {
@@ -129,45 +125,80 @@
                     <div class="grid grid-cols-2">
                         <div class="p-6">
                             <div class="flex items-center">
-                                <div class="text-2xl">アイコン</div>
+                                <div class="text-2xl">
+                                    <svg class="h-8 w-8"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+                                    </svg>
+                                </div>
                                 <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">機能1</div>
                             </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">あ</div>
+                            <div class="ml-5">
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-base">
+                                    実際の本棚にある本を「マイライブラリ」として，<br>
+                                    登録して簡単に一覧で見ることができる!<br>
+                                    表紙の画像と著者名，本のタイトルを<br>
+                                    記入して手軽に登録しよう!
+                                </div>
                             </div>
                         </div>
 
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
                             <div class="flex items-center">
-                               <div class="text-2xl">アイコン</div>
+                               <div class="text-2xl">
+                                   <svg class="h-8 w-8"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                               </div>
                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">機能2</div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">あ</div>
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-base">
+                                    毎日，本を読んだ日記を記録できる!<br>
+                                    その日に読んだマイライブラリに登録した本を<br>
+                                    選択して，ページ数と記録を記入しよう!<br>
+                                    手軽に日記をつけて，たまには見返してみよう!
+                                </div>
                             </div>
                         </div>
 
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center">
-                                <div class="text-2xl">アイコン</div>
+                                <div class="text-2xl">
+                                    <svg class="h-8 w-8"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
                                 <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">機能3</div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">あ</div>
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-base">
+                                    日記を書くとトップページのカレンダーに<br>
+                                    読んだ本のタイトルが表示されるぞ!<br>
+                                    毎日，日記を書いてカレンダーを塗りつぶそう!
+                                </div>
                             </div>
                         </div>
 
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
                             <div class="flex items-center">
-                                <div class="text-2xl">アイコン</div>
+                                <div class="text-2xl">
+                                    <svg class="h-12 w-12"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+                                        <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+                                    </svg>
+                                </div>
                                 <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">機能4</div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">あ</div>
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-base">
+                                    掲示板で読書好きの仲間とお話ししよう!<br>
+                                    気に入った人をフォローしたり，<br>
+                                    役に立つ投稿にいいね❤を付けたりして<br>
+                                    活発にコミュニケーションをしよう!
+                                </div>
                             </div>
                         </div>
                     </div>

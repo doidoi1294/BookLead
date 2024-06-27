@@ -24,7 +24,8 @@
             <p class="author__error mt-1 text-red-500">{{ $errors->first('book.author') }}</p>
         </div>
         <div class="image mb-4">
-            <input type="file" name="image">
+            <input type="file" name="image" class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+            <p class="image__error mt-1 text-red-500">{{ $errors->first('book.image_url') }}</p>
         </div>
         <div class="text-center">
             <input type="submit" value="保存" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105">

@@ -28,10 +28,16 @@ class BookController extends Controller
     //     return view('library.create');
     // }
     
-    public function store(Book $book, BookRequest $request) // 引数をRequestからBookRequestにする
+    public function store(Book $book, BookRequest $request)
     {   
-    // Cloudinaryへ画像を送信し、画像のURLを$image_urlに代入している
-    $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+    // 画像がアップロードされているかどうかを確認
+    if ($request->hasFile('image')) {
+        // Cloudinaryへ画像を送信し、画像のURLを$image_urlに代入している
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+    } else {
+        // 画像がアップロードされていない場合の処理
+        $image_url = null; // または、デフォルトの画像URLなどを設定
+    }
     
     // リクエストデータを取得し、画像のURLを追加
     $input = $request->book;
@@ -46,24 +52,40 @@ class BookController extends Controller
     // 保存後にリダイレクト
     return redirect('/'.$book->user_id.'/library/');
     }
+
     // Userの情報も渡す
     public function show(User $user, Book $book){
         return view('library.show')->with(['book' => $book]);
     }
     
     public function edit(User $user, Book $book)
-    {
-        return view('library.edit')->with(['book' => $book]);
+    {   
+        // データベースからすべての本のカテゴリを取得します
+        $book_categories = Book_category::all(); 
+        return view('library.edit')->with([
+            'book' => $book,
+            'book_categories' => $book_categories
+        ]);
     }
     
-    public function update(Book $book, BookRequest $request)
+    public function update(User $user, Book $book, BookRequest $request)
     {
-        $input_book = $request['book'];
-        $book->fill($input_book)->save();
-        
+        $input_book = $request->input('book');
+    
+        // 画像の処理
+        if ($request->hasFile('image')) {
+            // Cloudinaryへ画像を送信し、画像のURLを取得
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $input_book['image_url'] = $image_url;
+        }
+    
+        $book->fill($input_book);
         $book->user_id = Auth::id();
-        return redirect('/'.$book->user_id.'/library/');
+        $book->save();
+    
+        return redirect('/'.$book->user_id.'/library/')->with('success', '本の情報を更新しました。');
     }
+
     
     public function delete(User $user, Book $book)
     {

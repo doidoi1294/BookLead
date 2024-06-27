@@ -9,6 +9,7 @@ use App\Http\Controllers\Book_categoryController;
 use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\Post_likeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,5 +91,8 @@ Route::controller(FollowController::class)->middleware(['auth'])->group(function
     Route::post('/follow/{user}', 'follow')->name('follow');
     Route::delete('/unfollow/{user}', 'unfollow')->name('unfollow');
 });
+// 楽天のショップ機能
+
+Route::get('/search/index', [SearchController::class, 'search'])->middleware("auth")->name('searchIndex');
 
 require __DIR__.'/auth.php';

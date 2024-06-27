@@ -27,11 +27,12 @@
                     編集
                 </a>
             </div>
+            <!--投稿の削除ボタン-->
             <form action="/diaries/{{ $diary->id }}" id="form_{{ $diary->id }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="button" onclick="deletePost({{ $diary->id }})" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                    削除
+                <button type="button" onclick="deleteDiary({{ $diary->id }})" class="px-4 py-2 text-white rounded-md hover:bg-red-600">
+                    <svg class="h-8 w-8 text-red-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button> 
             </form>
         </div>
@@ -39,4 +40,13 @@
     <div class="back">
         [<a href="#" onclick="history.back()" class="text-blue-500 hover:underline">戻る</a>]
     </div>
+    <script>
+        function deleteDiary(id) {
+            'use strict'
+    
+            if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                document.getElementById(`form_${id}`).submit();
+            }
+        }
+    </script>
 </x-app-layout>

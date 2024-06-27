@@ -39,7 +39,7 @@ class DiaryController extends Controller
         $diary->save(); // データベースに保存
 
         $diary->book->user_id = Auth::id();
-        return redirect('/'. $diary->book->user_id .'1/home');
+        return redirect('/'. $diary->book->user_id .'/home');
     }
     
     public function show(Diary $diary){
@@ -48,8 +48,16 @@ class DiaryController extends Controller
     
     public function edit(Diary $diary)
     {
-        return view('diaries.edit')->with(['post' => $post]);
+        // すべての本のリストを取得
+        $books = Book::all();
+        
+        // ビューにdiaryとbooksを渡す
+        return view('diaries.edit')->with([
+            'diary' => $diary,
+            'books' => $books,
+        ]);
     }
+
     
     public function update(Diary $diary, DiaryRequest $request)
     {
@@ -62,7 +70,7 @@ class DiaryController extends Controller
     public function delete(Diary $diary)
     {
         $diary->delete();
-        return redirect('/diaries/index');
+        return redirect('/'. $diary->book->user_id .'/home');
     }
     
     // カレンダーのイベントでデータベースの情報を参照する

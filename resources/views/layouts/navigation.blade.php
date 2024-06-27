@@ -32,6 +32,10 @@
                     <x-nav-link :href="route('mypage', ['user' => Auth::id()])" :active="request()->routeIs('mypage')">
                         {{ __('マイページ') }}
                     </x-nav-link>
+                    
+                    <x-nav-link :href="route('searchIndex')" :active="request()->routeIs('searchIndex')">
+                        {{ __('ショップ') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => '土井克真',
-            'introduce' => Str::random(10),
             'email' => 'h520524b@mails.cc.ehime-u.ac.jp',
             'email_verified_at' => new DateTime(),
             'password' => Hash::make('2Nino5Nakano'),
@@ -30,15 +29,14 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => Str::random(10),
-            'introduce' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'email_verified_at' => new DateTime(),
             'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
-        foreach ($users as $user) {
-            DB::table('users')->insert($user);
-        }
+        // foreach ($users as $user) {
+        //     DB::table('users')->insert($user);
+        // }
     }
 }

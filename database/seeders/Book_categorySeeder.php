@@ -17,7 +17,22 @@ class Book_categorySeeder extends Seeder
     public function run()
     {
         DB::table('book_categories')->insert([
-            'name' => 'Example Category',
+            'name' => '小説',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('book_categories')->insert([
+            'name' => '自己啓発本',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('book_categories')->insert([
+            'name' => '専門書',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('book_categories')->insert([
+            'name' => 'その他',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
