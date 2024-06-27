@@ -17,7 +17,8 @@ class CommentSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
+        \Faker\Factory::create();
         Comment::factory()->count(5)->create();
     }
 }
