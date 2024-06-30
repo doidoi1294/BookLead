@@ -39,6 +39,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::delete('/posts/{post}', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
     Route::get('/{user}/posts/mypage', 'mypage')->name('mypage');
+    
 });
 
 Route::controller(BookController::class)->middleware(['auth'])->group(function(){

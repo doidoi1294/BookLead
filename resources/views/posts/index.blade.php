@@ -1,9 +1,21 @@
 <x-app-layout>
-    <x-slot name="title">掲示板トップページ</x-slot>
+    <x-slot name="title">投稿一覧</x-slot>
     <x-slot name="header">Blog Name</x-slot>
-
+    
     <div class="mt-8">
-        <!--カテゴリー選択-->
+        <h2 class="text-left underline">投稿カテゴリー検索</h2>
+        <form action='/posts/index' method="GET" class="flex items-center space-x-4 mt-2 mb-4">
+            <select name="category_id" class="border border-gray-300 rounded-md py-2 px-8 focus:outline-none focus:border-blue-500">
+                <option value="">全てのカテゴリー</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 ml-4">検索</button>
+        </form>
+        
         @foreach ($posts as $post)
             <div class="border border-gray-300 rounded-lg p-4 mb-4">
                 <!--投稿したユーザーの名前-->

@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 // リレーションを記述したモデル
 use App\Models\Category;
 
@@ -19,11 +20,21 @@ class PostController extends Controller
  * @param Post Postモデル
  * @return array Postモデルリスト
  */
-    public function index(Post $post)//インポートしたPostをインスタンス化して$postとして使用。
+    public function index(Request $request, Post $post, Category $category)
     {
-        //blade内で使う変数'posts'と設定。'posts'の中身にgetByLimit()を呼び出す。
-        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
+        $category_id = $request->input('category_id');
+        $query = $post->query();
+    
+        if ($category_id) {
+            $query->where('category_id', $category_id);
+        }
+    
+        $posts = $query->paginate(10);
+        $categories = $category->all();
+    
+        return view('posts.index')->with(['posts' => $posts, 'categories' => $categories]);
     }
+
     /**
      * 特定IDのpostを表示する
      *
@@ -33,7 +44,6 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('posts.show')->with(['post' => $post]);
-        //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
     }
     
     // public function create()

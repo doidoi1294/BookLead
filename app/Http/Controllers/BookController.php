@@ -6,6 +6,7 @@ use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
 use App\Models\User;
+use Illuminate\Http\Request;
 // リレーションを記述したモデル
 use App\Models\Book_category;
 // 画像アップロード用
@@ -13,10 +14,24 @@ use Cloudinary;
 
 class BookController extends Controller
 {
-    public function index(Book $book){
-        // $books = Book::all();
-        // dd($books);  // 取得したデータをデバッグ表示
-        return view('library.index')->with(['books' => $book->getPaginateByLimit()]);
+    // public function index(Book $book){
+    //     // $books = Book::all();
+    //     // dd($books);  // 取得したデータをデバッグ表示
+    //     return view('library.index')->with(['books' => $book->getPaginateByLimit()]);
+    // }
+    public function index(Request $request, Book $book, Book_category $book_category)
+    {
+        $book_category_id = $request->input('book_category_id');
+        $query = $book->query();
+    
+        if ($book_category_id) {
+            $query->where('book_category_id', $book_category_id);
+        }
+    
+        $books = $query->paginate(10);
+        $book_categories = $book_category->all();
+    
+        return view('library.index')->with(['books' => $books, 'book_categories' => $book_categories]);
     }
     
     public function create(Book_category $book_category){
